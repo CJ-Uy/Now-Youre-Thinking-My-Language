@@ -6,7 +6,36 @@ from unittest.mock import patch
 
 from research import ROOT, core
 from research.__main__ import digest
+from scripts.compare_teachers import compare_arms
 from scripts.prepare_teacher_comparison import prepare_pack
+
+
+def scored(question, pool, index, tokens, accuracy, text="Items"):
+    return {"id": f"train-{question}", "pool": pool, "candidate": index, "answer": "17", "reviewed": False,
+            "steps": [{"text": text, "equation": "3*5=15"}, {"text": "Total", "equation": "15+2=17"}],
+            "validation_errors": [], "tokens": tokens, "feedback_accuracy": accuracy}
+
+
+class TeacherComparisonTests(unittest.TestCase):
+    def test_arms_are_paired_only_on_questions_both_teachers_can_supply(self):
+        problems = [{"id": f"train-{i}", "question": "Q?", "solution": "<<3*5=15>>15 <<15+2=17>>17\n#### 17", "answer": "17"}
+                    for i in range(2)]
+        first = [scored(q, "english", 0, 20, 0.5) for q in range(2)] + [scored(q, "english", 1, 30, 1.0) for q in range(2)]
+        first += [scored(q, "multilingual", i, 18, 0.0, "物品") for q in range(2) for i in range(2)]
+        second = [scored(q, "english", 0, 16, 0.0) for q in range(2)] + [scored(q, "english", 1, 40, 1.0) for q in range(2)]
+        second += [scored(q, "multilingual", i, 15, 1.0) for q in range(2) for i in range(2)]
+        for row in second[-2:]:
+            row["feedback_error"] = "Partial solution reveals the final answer"
+        report = compare_arms(problems, {"a": first, "b": second}, {"train-0": 40, "train-1": 40}, 2, 0.1)
+        self.assertEqual(report["common_selected_ids"], ["train-0"])
+        self.assertEqual(report["arms"]["b"]["excluded"][0]["id"], "train-1")
+        self.assertEqual(report["arms"]["a"]["pools"]["multilingual"]["with_chinese_text"], 4)
+        self.assertEqual(report["arms"]["a"]["pools"]["english"]["mean_tokens_vs_original"], 0.625)
+        self.assertEqual(report["arms"]["b"]["pools"]["multilingual"]["feedback_eligible"], 2)
+        self.assertEqual(report["paired"]["english-shortest"]["mean_token_difference"], -4)
+        self.assertEqual(report["paired"]["english-feedback"]["mean_token_difference"], 10)
+        self.assertEqual(report["paired"]["english-feedback"]["a_shorter"], 1)
+        self.assertEqual(len(report["per_question"]), 4)
 
 
 class TeacherPackTests(unittest.TestCase):

@@ -41,7 +41,7 @@ The multilingual-feedback versus English-feedback comparison tests access to lan
 - Task: GSM8K, with 7,473 official training questions and 1,319 official test questions.
 - Pilot: 100 training questions, separate 300 calibration and 200 development questions, selected from the official training pool using seed 42.
 - Later scale: provisionally 1,000 training questions including the pilot. Prepare a new data directory and regenerate all conditions together when expanding.
-- Candidate pools: four English/equation and four multilingual/equation rewrites per question. The user selected a matched GPT-6.1 versus Opus 5.5 teacher comparison using ChatGPT/Claude exports; keep the teachers' datasets separate. Start with the shared ten-question [teacher comparison protocol](TEACHER_COMPARISON.md), then compare students trained on matched teacher-specific data.
+- Candidate pools: four English/equation and four multilingual/equation rewrites per question. Teacher: **Opus 5.5**, chosen on 24 October 2026 after a ten-question GPT-6.1 versus Opus 5.5 screening round ([protocol](TEACHER_COMPARISON.md), [results](pilots/2026-10-24-teacher-screening.md)). The teacher-specific student comparison was dropped; GPT outputs are kept only as a screening record.
 - Feedback: first half of the candidate's steps, no final answer, two student completions initially; recheck a subset with eight.
 - Training: LoRA, initially batch size 1 and accumulation 8. Maximum sequence length, epochs and other defaults are in `configs/pilot.json` and remain provisional until profiled.
 - Evaluation: question alone; reasoning budgets 128, 256 and 512, followed by up to 64 answer tokens. Report accuracy, generated tokens, elapsed time, failures and truncations together.
@@ -58,7 +58,7 @@ Environment setup and small GPU smoke checks verify that software can run. The f
 Research work still required:
 
 1. Profile the pilot and compare the two proposed student sizes before fixing one.
-2. Complete the matched GPT-6.1 and Opus 5.5 outputs, compare rewrite quality, and save displayed model/mode, prompts, raw outputs and available usage data. Opus has produced 80/80 structurally valid candidates; GPT collection and human meaning review remain pending. See the [screening audit](pilots/2026-10-24-teacher-screening.md).
+2. Teacher chosen: Opus 5.5 (see the experiment log). Fix the Opus collection procedure for the 100-question round and human-review the flagged round-1 candidates. Screening history: review the matched GPT-6.1 and Opus 5.5 outputs for preserved meaning. Both teachers have 80/80 mechanically valid candidates, and common feedback scoring is complete: 83/144 strict-format successes for GPT and 86/144 for Opus, with wide uncertainty. All candidates remain unreviewed, including a preserved GPT wording flag; no teacher winner or downstream training result is established. See the [screening comparison](pilots/2026-10-24-teacher-screening.md) and keep the original model/mode, prompts, raw outputs and available usage data.
 3. Generate candidate rewrites, inspect arithmetic-validation failures and review meaning. Both researchers should inspect a sample; any change in meaning disqualifies that rewrite.
 4. Calibrate the length penalty and assess feedback ranking stability.
 5. Complete the matched five-condition training/evaluation and repeat seeds if resources permit.

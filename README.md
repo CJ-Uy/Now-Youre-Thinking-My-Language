@@ -61,7 +61,7 @@ Outputs use new directories and files. Existing work is never overwritten; choos
 
 ## Prepare rewritten solutions
 
-The current plan compares **GPT-6.1 and Opus 5.5 as separate teachers**, using exports from ChatGPT and Claude. The [teacher comparison guide](docs/TEACHER_COMPARISON.md) provides a shared ten-question prompt pack, export/import steps and the matched student-training design. The code makes no paid API calls and stores no API keys. It supports importing teacher JSONL or using an already running local Ollama installation.
+The teacher is **Opus 5.5**, chosen on 24 October 2026 after a ten-question GPT-6.1 versus Opus 5.5 screening round (see the [experiment log](docs/EXPERIMENT_LOG.md)). The [teacher comparison guide](docs/TEACHER_COMPARISON.md) keeps that round's prompt pack and export/import steps, which also apply to Opus-only collection. The code makes no paid API calls and stores no API keys. It supports importing teacher JSONL or using an already running local Ollama installation.
 
 To use the proposal's local fallback, install Ollama separately, pull `qwen3:8b`, and run:
 

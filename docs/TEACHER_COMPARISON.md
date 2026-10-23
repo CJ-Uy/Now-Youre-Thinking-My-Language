@@ -2,7 +2,9 @@
 
 The user chose **two teachers generating training solutions**, with outputs exported from their ChatGPT and Claude accounts. The student remains Qwen3-0.6B. We compare the teaching material and, subsequently, students trained on it; we do not train the hosted teachers.
 
-**Status on 24 October 2026:** Opus produced all 80 candidates and all passed arithmetic/structure checks; GPT responses and human meaning review remain pending. See the [screening audit](pilots/2026-10-24-teacher-screening.md). The original-solution student baseline and its quick development comparison are [complete](pilots/2026-10-24-original-baseline.md). No teacher comparison winner has been established.
+**Status on 24 October 2026:** both teachers produced 80 candidates, all passed arithmetic/structure checks, and common student-feedback scoring is complete on the same nine eligible questions. GPT recorded 83/144 strict-format successes; Opus recorded 86/144. Human meaning review remains pending, including one preserved GPT wording flag. See the [screening comparison](pilots/2026-10-24-teacher-screening.md) for token counts, uncertainty and exclusions. No teacher-specific training ran or teacher winner was established. The original-solution student baseline and its quick development comparison are [complete](pilots/2026-10-24-original-baseline.md).
+
+**Decision on 24 October 2026:** the user chose Opus 5.5 as the single teacher, and the teacher-specific student comparison below is superseded. See the [experiment log](EXPERIMENT_LOG.md). This page now records the screening round. Its prompt pack, collection and import steps still apply to Opus-only collection.
 
 ## First round: ten matched training questions
 
@@ -53,7 +55,9 @@ For each teacher and each language pool, record:
 
 Use the existing `score` command separately on each imported arm after the baseline GPU evaluation finishes. Do not run competing GPU workloads while measuring latency. Inspect per-question results as well as averages; ten questions support feasibility screening, not a reliable claim that one teacher is superior. Record which candidates were excluded and why. A shorter response alone does not establish a better teacher.
 
-## Student training comparison
+## Student training comparison (superseded)
+
+Superseded on 24 October 2026 by the single-teacher decision; kept for history.
 
 Keep GPT-6.1 and Opus 5.5 datasets and adapters separate. To test downstream benefit, generate both arms for the same 100 training questions, retain a common set of eligible IDs, and train the same four rewrite conditions for each teacher. Reuse or retrain the original-solution adapter on exactly that common ID set. This full design has nine trained conditions: one original and four rewrites for each teacher, plus the unchanged pretrained reference. Use identical training settings and held-out evaluation questions.
 
