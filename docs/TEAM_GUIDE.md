@@ -57,6 +57,12 @@ Environment setup and small GPU smoke checks verify that software can run. The f
 
 Research work still required:
 
+**Status on 10 November 2026:** Opus 5.5 teacher candidates now exist for 98 of the 100 pilot training questions and the first 100 calibration questions; nothing is human-reviewed or scored yet. The user chose to hand the GPU pipeline to Codex with [prompts/codex-pilot-pipeline.md](../prompts/codex-pilot-pipeline.md): calibration and stability scoring, penalty choice, selection, an unreviewed screening series, human review worksheets for the selected rewrites, then a reviewed series. See the 10 November entries in the [experiment log](EXPERIMENT_LOG.md).
+
+For the move to Claude, use [CLAUDE_HANDOFF.md](CLAUDE_HANDOFF.md) as the results index and current scope. The combined [meaning-review queue](pilots/2026-10-24-teacher-meaning-audit.md) lists 26 priority candidates from both AI audits; every candidate still has `reviewed=false`. Teacher selection does not authorize training or approve those candidates.
+
+The [time and cost estimate](RESOURCE_ESTIMATE.md) gives GPU-hour, teacher-cost and review-time ranges for each stage, built from measured pilot rates. Evaluation, not training, dominates.
+
 1. Profile the pilot and compare the two proposed student sizes before fixing one.
 2. Teacher chosen: Opus 5.5 (see the experiment log). Fix the Opus collection procedure for the 100-question round and human-review the flagged round-1 candidates. Screening history: review the matched GPT-6.1 and Opus 5.5 outputs for preserved meaning. Both teachers have 80/80 mechanically valid candidates, and common feedback scoring is complete: 83/144 strict-format successes for GPT and 86/144 for Opus, with wide uncertainty. All candidates remain unreviewed, including a preserved GPT wording flag; no teacher winner or downstream training result is established. See the [screening comparison](pilots/2026-10-24-teacher-screening.md) and keep the original model/mode, prompts, raw outputs and available usage data.
 3. Generate candidate rewrites, inspect arithmetic-validation failures and review meaning. Both researchers should inspect a sample; any change in meaning disqualifies that rewrite.

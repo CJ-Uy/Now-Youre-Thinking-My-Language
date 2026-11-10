@@ -6,6 +6,8 @@ The user chose **two teachers generating training solutions**, with outputs expo
 
 **Decision on 24 October 2026:** the user chose Opus 5.5 as the single teacher, and the teacher-specific student comparison below is superseded. See the [experiment log](EXPERIMENT_LOG.md). This page now records the screening round. Its prompt pack, collection and import steps still apply to Opus-only collection.
 
+The [Claude handoff](CLAUDE_HANDOFF.md) indexes all saved results and the local transfer bundle. The [combined meaning audit](pilots/2026-10-24-teacher-meaning-audit.md) lists 26 priority candidates, preserving the different model-review findings. All 160 candidates remain `reviewed=false`; no training is authorized by the teacher decision.
+
 ## First round: ten matched training questions
 
 Use the first ten IDs in the saved pilot training partition. Both teachers receive exactly the same ten prompt files, including each original question and supplied solution. Each prompt requests four English/equation and four multilingual/equation candidates: 80 candidates per teacher, 160 in total. These batched prompts differ from the Ollama command's one-candidate-per-request protocol; do not pool those runs.
@@ -17,6 +19,8 @@ Create the pack from the repository root after preparing the locked pilot data:
 ```
 
 The script uses no model or API, verifies split hashes and the committed data lock, and refuses to overwrite a directory. It saves the ten inputs, prompt files and their SHA-256 hashes in `manifest.json`. The tracked template is [teacher-comparison-v1.txt](../prompts/teacher-comparison-v1.txt). To repeat the round, choose a new output directory.
+
+For later Opus-only collection, the same script takes `--split train|calibration`, `--start` (0-based position in the saved split), `--count` and `--teachers opus55`. The 10 November pilot packs used `--split train --start 10 --count 90` and `--split calibration --start 0 --count 100`, with the [batch instruction](../prompts/run-teacher-batch.md).
 
 If opening this repository in a coding assistant with Opus or GPT selected, use the [copy-and-paste teacher instruction](../prompts/run-teacher-comparison.md). Change only `ARM` between teachers and use the same collection procedure for both. A shared repository conversation has different context from isolated chat prompts; record which procedure was actually used.
 

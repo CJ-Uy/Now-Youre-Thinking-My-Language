@@ -90,6 +90,12 @@ The saved comparison verified all 20 raw-response hashes and both original prove
 
 All raw responses and scoring artifacts remain local and ignored; no screening data was published to the explainer. Back up the private artifact directory separately from Git.
 
+## Combined meaning audit and Claude handoff
+
+The subsequent [full meaning audit and human-review list](2026-10-24-teacher-meaning-audit.md) contains 26 unique priority candidates: eight specific items from the Codex read, two additional candidates carried forward from the parallel Claude review below, and sixteen variants affected by one shared source ambiguity. The original model verdicts and reviewer disagreements remain preserved. These are human-review requests, not a semantic pass rate; all 160 candidates remain `reviewed=false`.
+
+The user selected Opus 5.5 for future teacher work. The [Claude handoff](../CLAUDE_HANDOFF.md) records the current scope and local results bundle. This decision does not establish a teacher winner or authorize training. Measurements and historical review records below are unchanged.
+
 ## Independent reproduction and blind model review
 
 A separate Claude session repeated the consolidation, import and scoring in `artifacts/teacher-comparison/chat-export-round1/claude-pipeline-20261024/`. All 288 attempts match the run above in seed, predicted answer and output-token count, so the measurements reproduce exactly. The GPU timings of the two runs overlapped and are not comparable.

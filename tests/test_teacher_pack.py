@@ -79,6 +79,21 @@ class TeacherPackTests(unittest.TestCase):
                 self.assertNotIn("{{problem_json}}", text)
                 self.assertIn('"solution": "<<2+3=5>>\\n#### 5"', text)
 
+    def test_offset_single_teacher_pack_takes_the_requested_slice(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            data, rows = self.fixture(root)
+            with patch("scripts.prepare_teacher_comparison.ROOT", root):
+                prepare_pack(data, root / "pack", start=10, count=2, teachers=("opus55",))
+                with self.assertRaisesRegex(ValueError, "requires 3 train questions"):
+                    prepare_pack(data, root / "short", start=10, count=3, teachers=("opus55",))
+            manifest = json.loads((root / "pack/manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["question_ids"], ["train-10", "train-11"])
+            self.assertEqual(manifest["expected_candidates_per_teacher"], 16)
+            self.assertTrue((root / "pack/opus55/raw").is_dir())
+            self.assertFalse((root / "pack/gpt61").exists())
+            self.assertFalse((root / "short").exists())
+
     def test_changed_split_is_rejected_before_creating_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
