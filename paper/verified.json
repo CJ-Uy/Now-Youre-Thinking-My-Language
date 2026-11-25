@@ -1,0 +1,686 @@
+{
+ "appendix_a": [
+  [
+   128,
+   "unchanged",
+   200,
+   41,
+   20.5,
+   123.53,
+   6.05,
+   112,
+   93,
+   0
+  ],
+  [
+   128,
+   "original",
+   200,
+   73,
+   36.5,
+   102.56,
+   8.29,
+   12,
+   59,
+   0
+  ],
+  [
+   128,
+   "english-shortest",
+   200,
+   72,
+   36.0,
+   53.52,
+   5.22,
+   1,
+   3,
+   0
+  ],
+  [
+   128,
+   "english-feedback",
+   200,
+   71,
+   35.5,
+   57.26,
+   5.1,
+   3,
+   4,
+   0
+  ],
+  [
+   128,
+   "multilingual-shortest",
+   200,
+   61,
+   30.5,
+   54.38,
+   4.89,
+   5,
+   4,
+   0
+  ],
+  [
+   128,
+   "multilingual-feedback",
+   200,
+   64,
+   32.0,
+   53.83,
+   4.82,
+   4,
+   3,
+   0
+  ],
+  [
+   256,
+   "unchanged",
+   200,
+   66,
+   33.0,
+   142.56,
+   6.61,
+   87,
+   14,
+   0
+  ],
+  [
+   256,
+   "original",
+   200,
+   87,
+   43.5,
+   113.59,
+   9.2,
+   2,
+   2,
+   0
+  ],
+  [
+   256,
+   "english-shortest",
+   200,
+   72,
+   36.0,
+   54.4,
+   5.17,
+   1,
+   1,
+   0
+  ],
+  [
+   256,
+   "english-feedback",
+   200,
+   71,
+   35.5,
+   58.73,
+   5.0,
+   3,
+   2,
+   0
+  ],
+  [
+   256,
+   "multilingual-shortest",
+   200,
+   61,
+   30.5,
+   54.78,
+   4.76,
+   4,
+   0,
+   0
+  ],
+  [
+   256,
+   "multilingual-feedback",
+   200,
+   64,
+   32.0,
+   55.14,
+   4.81,
+   4,
+   2,
+   0
+  ],
+  [
+   512,
+   "unchanged",
+   200,
+   63,
+   31.5,
+   146.69,
+   6.68,
+   88,
+   1,
+   0
+  ],
+  [
+   512,
+   "original",
+   200,
+   87,
+   43.5,
+   114.18,
+   8.85,
+   2,
+   0,
+   0
+  ],
+  [
+   512,
+   "english-shortest",
+   200,
+   72,
+   36.0,
+   55.67,
+   4.87,
+   1,
+   1,
+   0
+  ],
+  [
+   512,
+   "english-feedback",
+   200,
+   71,
+   35.5,
+   61.28,
+   5.15,
+   3,
+   2,
+   0
+  ],
+  [
+   512,
+   "multilingual-shortest",
+   200,
+   61,
+   30.5,
+   54.78,
+   4.77,
+   4,
+   0,
+   0
+  ],
+  [
+   512,
+   "multilingual-feedback",
+   200,
+   64,
+   32.0,
+   57.7,
+   4.86,
+   4,
+   2,
+   0
+  ]
+ ],
+ "appendix_b": [
+  [
+   128,
+   "english-shortest",
+   "multilingual-shortest",
+   -5.5,
+   -13.0,
+   1.5,
+   -1.6,
+   200,
+   2000,
+   42
+  ],
+  [
+   128,
+   "english-feedback",
+   "multilingual-feedback",
+   -3.5,
+   -10.5,
+   3.0,
+   6.0,
+   200,
+   2000,
+   42
+  ],
+  [
+   128,
+   "original",
+   "english-shortest",
+   -0.5,
+   -7.0,
+   6.5,
+   47.8,
+   200,
+   2000,
+   42
+  ],
+  [
+   128,
+   "original",
+   "english-feedback",
+   -1.0,
+   -8.5,
+   6.5,
+   44.2,
+   200,
+   2000,
+   42
+  ],
+  [
+   128,
+   "original",
+   "multilingual-shortest",
+   -6.0,
+   -13.5,
+   1.5,
+   47.0,
+   200,
+   2000,
+   42
+  ],
+  [
+   128,
+   "original",
+   "multilingual-feedback",
+   -4.5,
+   -11.5,
+   2.5,
+   47.5,
+   200,
+   2000,
+   42
+  ],
+  [
+   128,
+   "unchanged",
+   "original",
+   16.0,
+   8.5,
+   24.0,
+   17.0,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "english-shortest",
+   "multilingual-shortest",
+   -5.5,
+   -13.0,
+   1.5,
+   -0.7,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "english-feedback",
+   "multilingual-feedback",
+   -3.5,
+   -10.5,
+   3.0,
+   6.1,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "original",
+   "english-shortest",
+   -7.5,
+   -14.0,
+   -0.5,
+   52.1,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "original",
+   "english-feedback",
+   -8.0,
+   -15.0,
+   -0.5,
+   48.3,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "original",
+   "multilingual-shortest",
+   -13.0,
+   -20.5,
+   -5.5,
+   51.8,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "original",
+   "multilingual-feedback",
+   -11.5,
+   -19.0,
+   -4.0,
+   51.5,
+   200,
+   2000,
+   42
+  ],
+  [
+   256,
+   "unchanged",
+   "original",
+   10.5,
+   2.5,
+   18.5,
+   20.3,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "english-shortest",
+   "multilingual-shortest",
+   -5.5,
+   -13.0,
+   1.5,
+   1.6,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "english-feedback",
+   "multilingual-feedback",
+   -3.5,
+   -10.5,
+   3.0,
+   5.8,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "original",
+   "english-shortest",
+   -7.5,
+   -14.0,
+   -0.5,
+   51.2,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "original",
+   "english-feedback",
+   -8.0,
+   -15.0,
+   -0.5,
+   46.3,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "original",
+   "multilingual-shortest",
+   -13.0,
+   -20.5,
+   -5.5,
+   52.0,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "original",
+   "multilingual-feedback",
+   -11.5,
+   -19.0,
+   -4.0,
+   49.5,
+   200,
+   2000,
+   42
+  ],
+  [
+   512,
+   "unchanged",
+   "original",
+   12.0,
+   4.0,
+   20.0,
+   22.2,
+   200,
+   2000,
+   42
+  ]
+ ],
+ "quick": {
+  "unchanged": {
+   "n": 50,
+   "budgets": [
+    256
+   ],
+   "first50_of_course_order": true,
+   "laptop_correct": 18,
+   "course_correct": 18,
+   "identical_outputs": 0,
+   "seeds_match": true
+  },
+  "original": {
+   "n": 50,
+   "budgets": [
+    256
+   ],
+   "first50_of_course_order": true,
+   "laptop_correct": 26,
+   "course_correct": 25,
+   "identical_outputs": 1,
+   "seeds_match": true
+  },
+  "english-shortest": {
+   "n": 50,
+   "budgets": [
+    256
+   ],
+   "first50_of_course_order": true,
+   "laptop_correct": 15,
+   "course_correct": 21,
+   "identical_outputs": 4,
+   "seeds_match": true
+  },
+  "english-feedback": {
+   "n": 50,
+   "budgets": [
+    256
+   ],
+   "first50_of_course_order": true,
+   "laptop_correct": 21,
+   "course_correct": 21,
+   "identical_outputs": 1,
+   "seeds_match": true
+  },
+  "multilingual-shortest": {
+   "n": 50,
+   "budgets": [
+    256
+   ],
+   "first50_of_course_order": true,
+   "laptop_correct": 23,
+   "course_correct": 16,
+   "identical_outputs": 1,
+   "seeds_match": true
+  },
+  "multilingual-feedback": {
+   "n": 50,
+   "budgets": [
+    256
+   ],
+   "first50_of_course_order": true,
+   "laptop_correct": 24,
+   "course_correct": 18,
+   "identical_outputs": 1,
+   "seeds_match": true
+  }
+ },
+ "identical_across_budgets": {
+  "unchanged": [
+   107,
+   200
+  ],
+  "original": [
+   141,
+   200
+  ],
+  "english-shortest": [
+   197,
+   200
+  ],
+  "english-feedback": [
+   196,
+   200
+  ],
+  "multilingual-shortest": [
+   196,
+   200
+  ],
+  "multilingual-feedback": [
+   197,
+   200
+  ]
+ },
+ "han": {
+  "unchanged": [
+   0,
+   0
+  ],
+  "original": [
+   0,
+   0
+  ],
+  "english-shortest": [
+   0,
+   0
+  ],
+  "english-feedback": [
+   0,
+   0
+  ],
+  "multilingual-shortest": [
+   193,
+   78
+  ],
+  "multilingual-feedback": [
+   191,
+   66
+  ]
+ },
+ "examples": {
+  "train-4978/unchanged": {
+   "tokens": 137,
+   "predicted": null,
+   "correct": false
+  },
+  "train-4978/original": {
+   "tokens": 70,
+   "predicted": "5/9",
+   "correct": false
+  },
+  "train-4978/english-shortest": {
+   "tokens": 55,
+   "predicted": "80",
+   "correct": true
+  },
+  "train-4978/english-feedback": {
+   "tokens": 44,
+   "predicted": "80",
+   "correct": true
+  },
+  "train-4978/multilingual-shortest": {
+   "tokens": 41,
+   "predicted": "108",
+   "correct": false
+  },
+  "train-4978/multilingual-feedback": {
+   "tokens": 38,
+   "predicted": "6",
+   "correct": false
+  },
+  "train-5952/unchanged": {
+   "tokens": 112,
+   "predicted": "20",
+   "correct": true
+  },
+  "train-5952/original": {
+   "tokens": 146,
+   "predicted": "20",
+   "correct": true
+  },
+  "train-5952/english-shortest": {
+   "tokens": 83,
+   "predicted": "10",
+   "correct": false
+  },
+  "train-5952/english-feedback": {
+   "tokens": 59,
+   "predicted": "20",
+   "correct": true
+  },
+  "train-5952/multilingual-shortest": {
+   "tokens": 83,
+   "predicted": "20",
+   "correct": true
+  },
+  "train-5952/multilingual-feedback": {
+   "tokens": 47,
+   "predicted": "20",
+   "correct": true
+  },
+  "train-6304/unchanged": {
+   "tokens": 89,
+   "predicted": "6",
+   "correct": true
+  },
+  "train-6304/original": {
+   "tokens": 88,
+   "predicted": "6",
+   "correct": true
+  },
+  "train-6304/english-shortest": {
+   "tokens": 47,
+   "predicted": "6",
+   "correct": true
+  },
+  "train-6304/english-feedback": {
+   "tokens": 71,
+   "predicted": "6",
+   "correct": true
+  },
+  "train-6304/multilingual-shortest": {
+   "tokens": 53,
+   "predicted": "6",
+   "correct": true
+  },
+  "train-6304/multilingual-feedback": {
+   "tokens": 49,
+   "predicted": "6",
+   "correct": true
+  }
+ }
+}
