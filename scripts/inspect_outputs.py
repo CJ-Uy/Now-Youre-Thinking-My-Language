@@ -2,6 +2,7 @@
 
 import argparse
 from fractions import Fraction
+from itertools import product
 import json
 from pathlib import Path
 import re
@@ -38,7 +39,7 @@ def gold_intermediates(problem):
 def inspect(prediction, problem):
     output = prediction.get("output") or ""
     han, latin = len(CJK.findall(output)), len(LATIN.findall(output))
-    present = {Fraction(n.replace(",", "")) for n in PLAIN_NUMBER.findall(output.rsplit("####", 1)[0])}
+    present = {Fraction(n.replace(",", "")) for n in PLAIN_NUMBER.findall(output.partition("####")[0])}
     gold = gold_intermediates(problem)
     missing = sorted(gold - present)
     finished = not prediction["truncated"] and not prediction["error"]
@@ -46,8 +47,9 @@ def inspect(prediction, problem):
             "truncated": prediction["truncated"], "error": prediction["error"],
             "output_tokens": prediction["output_tokens"], "han_characters": han,
             "mandarin_share": han / (han + latin) if han + latin else None,
-            "gold_intermediates": len(gold), "missing_intermediates": [str(v) for v in missing],
-            "coverage": (len(gold) - len(missing)) / len(gold) if gold else None,
+            "gold_intermediates": len(gold),
+            "missing_intermediates": None if prediction["error"] else [str(v) for v in missing],
+            "coverage": (len(gold) - len(missing)) / len(gold) if gold and not prediction["error"] else None,
             "lost_step_candidate": bool(missing) and finished and not prediction["correct"],
             "skipped_step_correct": bool(missing) and prediction["correct"]}
 
@@ -64,13 +66,15 @@ def summarize(rows):
             "skipped_step_correct": [r["id"] for r in rows if r["skipped_step_correct"]]}
 
 
-def inspect_runs(problems, runs):
+def inspect_runs(problems, runs, expected_keys=None):
     lookup = {p["id"]: p for p in problems}
-    keys = [{(p["id"], p["budget"]) for p in predictions} for predictions in runs.values()]
-    if any(k != keys[0] for k in keys):
-        raise ValueError("Runs must cover the same question IDs and budgets")
     rows, summaries = [], {}
     for name, predictions in runs.items():
+        keys = {(p["id"], p["budget"]) for p in predictions}
+        if expected_keys is None:
+            expected_keys = keys
+        if len(keys) != len(predictions) or keys != expected_keys:
+            raise ValueError(f"{name} must have one prediction per expected question ID and budget")
         if any(p["id"] not in lookup for p in predictions):
             raise ValueError(f"{name} has predictions outside the development split")
         inspected = [dict(inspect(p, lookup[p["id"]]), run=name) for p in predictions]
@@ -92,20 +96,27 @@ def main():
     config = load_config(args.config)
     manifest = load_data(args, config)
     runs, sources = {}, {}
+    expected_keys = None
     for name, path in (spec.split("=", 1) for spec in args.run):
+        if not name or name in runs:
+            parser.error("Give each --run a unique, nonempty name")
         run_manifest = read_json(Path(path) / "manifest.json")
         if run_manifest["data_manifest"] != core.data_identity(manifest):
             raise ValueError(f"{name} was evaluated with different prepared data")
         if run_manifest["split"] != "development":
             raise ValueError("Only development runs are supported; official-test rows do not store gold solutions")
+        declared = set(product(run_manifest["question_ids"], run_manifest["budgets"]))
+        if expected_keys is not None and declared != expected_keys:
+            raise ValueError("Run manifests must cover the same question IDs and budgets")
+        expected_keys = declared
         runs[name] = core.read_jsonl(Path(path) / "predictions.jsonl")
         sources[name] = {"directory": str(path), "condition": run_manifest["condition"],
                          "predictions_sha256": digest(Path(path) / "predictions.jsonl")}
-    report = inspect_runs(core.read_jsonl(args.data / "development.jsonl"), runs)
+    report = inspect_runs(core.read_jsonl(args.data / "development.jsonl"), runs, expected_keys)
     report.update(status="Screening aid: flags choose outputs for human reading; they are not judgments",
                   method=("Mandarin share is Han characters over Han plus Latin letters. Coverage counts gold "
                           "intermediate values from the <<...>> annotations, excluding the final answer, that appear "
-                          "as plain numbers before the final ####. A different valid path, unit or percentage form "
+                          "as unsigned plain numbers before the first ####. A different valid path, unit or percentage form "
                           "can miss a value without losing a step. Lost-step candidates are finished incorrect "
                           "outputs missing at least one gold intermediate."),
                   runs=sources)

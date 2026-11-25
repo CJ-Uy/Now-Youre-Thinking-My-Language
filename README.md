@@ -34,7 +34,9 @@ The supplied pilot configuration is [configs/pilot.json](configs/pilot.json). To
 .venv\Scripts\python.exe -m research train --help
 ```
 
-Linux can use Python 3.12, `python -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt`, and the same module commands. The pinned PyTorch build requires a compatible NVIDIA driver; `doctor` reports CUDA availability. Native Windows is the setup verified here.
+Linux can use Python 3.12, `python -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt`, and the same module commands. The pinned PyTorch build requires a compatible NVIDIA driver; `doctor` reports CUDA availability. Native Windows and the school Linux setup below have passed smoke checks.
+
+The [school GPU setup guide](docs/SCHOOL_GPU.md) records the private COMP4901B cluster checkout, WSL connection method, Linux environment and verification status. Use its evidence separately from the laptop timings.
 
 ## Run the original-solution baseline
 

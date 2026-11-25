@@ -208,7 +208,7 @@ def select_conditions(problems, candidates, per_pool, penalty):
     for problem in problems:
         pools = groups[problem["id"]]
         valid = {pool: [c for c in pools[pool] if not validate_candidate(c, problem) and not c.get("feedback_error")
-                         and c.get("human_rejected") is not True] for pool in POOLS}
+                         and c.get("human_rejected") is not True and c.get("ai_rejected") is not True] for pool in POOLS}
         if any(len(pools[pool]) != per_pool or not valid[pool] for pool in POOLS):
             excluded.append({"id": problem["id"], "reason": "Missing candidate pool or no valid candidate in a pool"})
             continue

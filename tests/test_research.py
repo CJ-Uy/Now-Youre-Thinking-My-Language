@@ -140,6 +140,13 @@ class DataTests(unittest.TestCase):
         self.assertEqual(result["english-feedback"][0]["candidate"], 0)
         self.assertEqual(result["multilingual-feedback"][0]["candidate"], 1)
 
+    def test_ai_rejected_candidate_is_skipped_like_a_human_rejection(self):
+        rows = [candidate(pool, i) for pool in ("english", "multilingual") for i in range(2)]
+        rows[2]["ai_rejected"] = True
+        result, excluded = core.select_conditions([problem()], rows, 2, 0.1)
+        self.assertEqual(excluded, [])
+        self.assertEqual(result["multilingual-shortest"][0]["candidate"], 1)
+
     def test_equivalent_numeric_answers_stay_canonical_in_training_rows(self):
         rows = [candidate("english"), candidate("multilingual")]
         rows[0]["answer"] = "17.0"
