@@ -151,7 +151,7 @@ The independent transfer set, human review of 50 outputs, repeated training seed
 | `.cache/huggingface/` | Downloaded model and dataset cache |
 | `explainer/` | Existing website; deploys only `explainer/public/` |
 | `paper/` | Course paper text, verified numbers, figures and build scripts; see [paper/README.md](paper/README.md) |
-| `output/` | Built paper: `output/docx/paper.docx` and `output/pdf/paper.pdf` |
+| `output/` | Built paper (`output/docx/paper.docx`, `output/pdf/paper.pdf`) and the final presentation (`output/pdf/presentation-slides.pdf`, `output/pdf/presentation-script.pdf`) |
 | `prompts/` | Prompts handed to other assistants, including the slide and script update |
 
 Local environments, caches, experiment artifacts and `.env` files are ignored by Git. Archive `artifacts/` separately for reproducibility; ignored does not mean backed up. Manifests record direct package versions, Python, GPU, Git commit/dirty status, seeds, configurations and model/dataset revisions. `requirements-lock.txt` records the complete environment tested during setup.

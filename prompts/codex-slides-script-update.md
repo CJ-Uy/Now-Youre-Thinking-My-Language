@@ -2,7 +2,9 @@
 
 Written 26 November 2026 after the paper revision. The deck source is not in this repository. Hand the block below to the assistant that rebuilds the deck and the presentation script.
 
-Checked against the course predictions and the cached Qwen3-0.6B tokenizer: every number on slides 1–8. Not checked: backup slides 9–11, which were not in the script PDF.
+Checked against the course predictions and the cached Qwen3-0.6B tokenizer: every number on slides 1–8.
+
+The rebuilt deck and script are `output/pdf/presentation-slides.pdf` and `output/pdf/presentation-script.pdf`. They apply every change below. Backup slides 9 and 10 match the paper. One fix is still open: backup slide 11 says "Repeat estimate of 9–14 compute hours" and should say 9–13.
 
 ```text
 TASK: Update the 8-slide deck and the presentation script for "Now You're Thinking My Language".
