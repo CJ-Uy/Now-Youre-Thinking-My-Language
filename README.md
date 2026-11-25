@@ -34,7 +34,9 @@ The supplied pilot configuration is [configs/pilot.json](configs/pilot.json). To
 .venv\Scripts\python.exe -m research train --help
 ```
 
-Linux can use Python 3.12, `python -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt`, and the same module commands. The pinned PyTorch build requires a compatible NVIDIA driver; `doctor` reports CUDA availability. Native Windows is the setup verified here.
+Linux can use Python 3.12, `python -m venv .venv`, `.venv/bin/python -m pip install -r requirements.txt`, and the same module commands. The pinned PyTorch build requires a compatible NVIDIA driver; `doctor` reports CUDA availability. Native Windows and the school Linux setup below have passed smoke checks.
+
+The [school GPU setup guide](docs/SCHOOL_GPU.md) records the private COMP4901B cluster checkout, WSL connection method, Linux environment and verification status. Use its evidence separately from the laptop timings.
 
 ## Run the original-solution baseline
 
@@ -61,7 +63,11 @@ Outputs use new directories and files. Existing work is never overwritten; choos
 
 ## Prepare rewritten solutions
 
-The current plan compares **GPT-6.1 and Opus 5.5 as separate teachers**, using exports from ChatGPT and Claude. The [teacher comparison guide](docs/TEACHER_COMPARISON.md) provides a shared ten-question prompt pack, export/import steps and the matched student-training design. The code makes no paid API calls and stores no API keys. It supports importing teacher JSONL or using an already running local Ollama installation.
+The teacher is **Opus 5.5**, chosen on 24 October 2026 after a ten-question GPT-6.1 versus Opus 5.5 screening round (see the [experiment log](docs/EXPERIMENT_LOG.md)). The [teacher comparison guide](docs/TEACHER_COMPARISON.md) keeps that round's prompt pack and export/import steps, which also apply to Opus-only collection. The code makes no paid API calls and stores no API keys. It supports importing teacher JSONL or using an already running local Ollama installation.
+
+**Continuing in Claude:** start with [the handoff and complete results index](docs/CLAUDE_HANDOFF.md). The [combined meaning-review queue](docs/pilots/2026-10-24-teacher-meaning-audit.md) has 26 priority candidates from the screening round. The handoff names the private local results bundle.
+
+**Current status (10 November 2026):** Opus teacher data for the 100-question pilot and 100 calibration questions is collected and imported, all unreviewed. The GPU pipeline continues in Codex with [prompts/codex-pilot-pipeline.md](prompts/codex-pilot-pipeline.md); see the experiment log for decisions.
 
 To use the proposal's local fallback, install Ollama separately, pull `qwen3:8b`, and run:
 
@@ -144,6 +150,9 @@ The independent transfer set, human review of 50 outputs, repeated training seed
 | `artifacts/runs/` | Local adapters, environment/config metadata and predictions |
 | `.cache/huggingface/` | Downloaded model and dataset cache |
 | `explainer/` | Existing website; deploys only `explainer/public/` |
+| `paper/` | Course paper text, verified numbers, figures and build scripts; see [paper/README.md](paper/README.md) |
+| `output/` | Built paper (`output/docx/paper.docx`, `output/pdf/paper.pdf`) and the final presentation (`output/pdf/presentation-slides.pdf`, `output/pdf/presentation-script.pdf`) |
+| `prompts/` | Prompts handed to other assistants, including the slide and script update |
 
 Local environments, caches, experiment artifacts and `.env` files are ignored by Git. Archive `artifacts/` separately for reproducibility; ignored does not mean backed up. Manifests record direct package versions, Python, GPU, Git commit/dirty status, seeds, configurations and model/dataset revisions. `requirements-lock.txt` records the complete environment tested during setup.
 

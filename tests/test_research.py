@@ -128,6 +128,25 @@ class DataTests(unittest.TestCase):
         result, excluded = core.select_conditions([problem()], rows, 1, 0.1)
         self.assertTrue(all(not group for group in result.values()))
 
+    def test_human_rejected_candidate_is_never_selected_but_keeps_the_pool_complete(self):
+        rows = [candidate(pool, i) for pool in ("english", "multilingual") for i in range(2)]
+        for row in rows:
+            if row["candidate"] == 1:
+                row.update(tokens=30, feedback_accuracy=1.0)
+        rows[1]["human_rejected"] = True
+        result, excluded = core.select_conditions([problem()], rows, 2, 0.1)
+        self.assertEqual(excluded, [])
+        self.assertEqual(result["english-shortest"][0]["candidate"], 0)
+        self.assertEqual(result["english-feedback"][0]["candidate"], 0)
+        self.assertEqual(result["multilingual-feedback"][0]["candidate"], 1)
+
+    def test_ai_rejected_candidate_is_skipped_like_a_human_rejection(self):
+        rows = [candidate(pool, i) for pool in ("english", "multilingual") for i in range(2)]
+        rows[2]["ai_rejected"] = True
+        result, excluded = core.select_conditions([problem()], rows, 2, 0.1)
+        self.assertEqual(excluded, [])
+        self.assertEqual(result["multilingual-shortest"][0]["candidate"], 1)
+
     def test_equivalent_numeric_answers_stay_canonical_in_training_rows(self):
         rows = [candidate("english"), candidate("multilingual")]
         rows[0]["answer"] = "17.0"

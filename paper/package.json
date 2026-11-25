@@ -1,0 +1,11 @@
+{
+  "name": "compact-multilingual-reasoning-paper",
+  "private": true,
+  "description": "Builds the course paper as a Word document.",
+  "scripts": {
+    "build": "node build_paper.js"
+  },
+  "dependencies": {
+    "docx": "^9.5.1"
+  }
+}

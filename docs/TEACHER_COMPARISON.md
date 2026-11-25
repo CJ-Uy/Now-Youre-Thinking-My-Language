@@ -2,7 +2,11 @@
 
 The user chose **two teachers generating training solutions**, with outputs exported from their ChatGPT and Claude accounts. The student remains Qwen3-0.6B. We compare the teaching material and, subsequently, students trained on it; we do not train the hosted teachers.
 
-**Status on 24 October 2026:** Opus produced all 80 candidates and all passed arithmetic/structure checks; GPT responses and human meaning review remain pending. See the [screening audit](pilots/2026-10-24-teacher-screening.md). The original-solution student baseline and its quick development comparison are [complete](pilots/2026-10-24-original-baseline.md). No teacher comparison winner has been established.
+**Status on 24 October 2026:** both teachers produced 80 candidates, all passed arithmetic/structure checks, and common student-feedback scoring is complete on the same nine eligible questions. GPT recorded 83/144 strict-format successes; Opus recorded 86/144. Human meaning review remains pending, including one preserved GPT wording flag. See the [screening comparison](pilots/2026-10-24-teacher-screening.md) for token counts, uncertainty and exclusions. No teacher-specific training ran or teacher winner was established. The original-solution student baseline and its quick development comparison are [complete](pilots/2026-10-24-original-baseline.md).
+
+**Decision on 24 October 2026:** the user chose Opus 5.5 as the single teacher, and the teacher-specific student comparison below is superseded. See the [experiment log](EXPERIMENT_LOG.md). This page now records the screening round. Its prompt pack, collection and import steps still apply to Opus-only collection.
+
+The [Claude handoff](CLAUDE_HANDOFF.md) indexes all saved results and the local transfer bundle. The [combined meaning audit](pilots/2026-10-24-teacher-meaning-audit.md) lists 26 priority candidates, preserving the different model-review findings. All 160 candidates remain `reviewed=false`; no training is authorized by the teacher decision.
 
 ## First round: ten matched training questions
 
@@ -15,6 +19,8 @@ Create the pack from the repository root after preparing the locked pilot data:
 ```
 
 The script uses no model or API, verifies split hashes and the committed data lock, and refuses to overwrite a directory. It saves the ten inputs, prompt files and their SHA-256 hashes in `manifest.json`. The tracked template is [teacher-comparison-v1.txt](../prompts/teacher-comparison-v1.txt). To repeat the round, choose a new output directory.
+
+For later Opus-only collection, the same script takes `--split train|calibration`, `--start` (0-based position in the saved split), `--count` and `--teachers opus55`. The 10 November pilot packs used `--split train --start 10 --count 90` and `--split calibration --start 0 --count 100`, with the [batch instruction](../prompts/run-teacher-batch.md).
 
 If opening this repository in a coding assistant with Opus or GPT selected, use the [copy-and-paste teacher instruction](../prompts/run-teacher-comparison.md). Change only `ARM` between teachers and use the same collection procedure for both. A shared repository conversation has different context from isolated chat prompts; record which procedure was actually used.
 
@@ -53,7 +59,9 @@ For each teacher and each language pool, record:
 
 Use the existing `score` command separately on each imported arm after the baseline GPU evaluation finishes. Do not run competing GPU workloads while measuring latency. Inspect per-question results as well as averages; ten questions support feasibility screening, not a reliable claim that one teacher is superior. Record which candidates were excluded and why. A shorter response alone does not establish a better teacher.
 
-## Student training comparison
+## Student training comparison (superseded)
+
+Superseded on 24 October 2026 by the single-teacher decision; kept for history.
 
 Keep GPT-6.1 and Opus 5.5 datasets and adapters separate. To test downstream benefit, generate both arms for the same 100 training questions, retain a common set of eligible IDs, and train the same four rewrite conditions for each teacher. Reuse or retrain the original-solution adapter on exactly that common ID set. This full design has nine trained conditions: one original and four rewrites for each teacher, plus the unchanged pretrained reference. Use identical training settings and held-out evaluation questions.
 
